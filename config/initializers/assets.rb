@@ -8,3 +8,11 @@ Rails.application.config.assets.version = "1.0"
 Rails.application.config.assets.paths << Rails.root.join("node_modules/bootstrap-icons/font")
 Rails.application.config.assets.paths << Rails.root.join("node_modules/bootstrap/dist/js")
 Rails.application.config.assets.precompile << "bootstrap.bundle.min.js"
+
+# Add Semantic UI paths so Sass can locate the SCSS and theme assets
+Rails.application.config.assets.paths << Rails.root.join("node_modules", "@doabit", "semantic-ui-sass", "src", "scss")
+Rails.application.config.assets.paths << Rails.root.join("node_modules", "@doabit", "semantic-ui-sass", "src", "assets", "fonts")
+Rails.application.config.assets.paths << Rails.root.join("node_modules", "@doabit", "semantic-ui-sass", "src", "assets", "images")
+
+# If Semantic UI references fonts or images, you may also want to precompile them:
+Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|woff2|ttf)$/
