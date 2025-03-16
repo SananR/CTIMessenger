@@ -11,4 +11,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root "chatroom#index"
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+
+  post 'message', to: 'messages#create'
+
+  # Serve websocket cable requests in-process
+  mount ActionCable.server, at: '/cable'
 end
