@@ -2,8 +2,16 @@ class Message < ApplicationRecord
     belongs_to :user
     validates :body, presence: true
 
-    # Override GlobalID's unique index check for this model.
-    def self.ensure_unique_index!
-        true
+    after_commit :broadcast_message, on: :create
+
+    private
+
+    def broadcast_message
+        ActionCable.server.broadcast "chatroom_channel", {
+          message: ApplicationController.render(
+            partial: 'messages/message',
+            locals: { message: self }
+          )
+        }
     end
 end
