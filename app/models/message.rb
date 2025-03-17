@@ -4,6 +4,10 @@ class Message < ApplicationRecord
 
     after_commit :broadcast_message, on: :create
 
+    def to_gid_param
+        id.to_s
+    end
+
     private
 
     def broadcast_message
