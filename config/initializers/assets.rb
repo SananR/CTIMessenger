@@ -17,3 +17,4 @@ Rails.application.config.assets.paths << Rails.root.join("node_modules", "@doabi
 # If Semantic UI references fonts or images, you may also want to precompile them:
 Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|woff2|ttf)$/
 Rails.application.config.assets.precompile += %w( application.css )
+Rails.application.config.assets.paths << Rails.root.join("app/assets/builds")
