@@ -7,11 +7,14 @@ class Message < ApplicationRecord
     private
 
     def broadcast_message
-        ActionCable.server.broadcast "chatroom_channel", {
-          message: ApplicationController.render(
-            partial: 'messages/message',
-            locals: { message: self }
-          )
-        }
+        # Reload the record so that all index metadata is fresh
+        reloaded_message = Message.find(id)
+        
+        rendered_message = ApplicationController.render(
+            partial: 'messages/message',  # ensure this path matches your partial location
+            locals: { message: reloaded_message }
+        )
+        
+        ActionCable.server.broadcast "chatroom_channel", { message: rendered_message }
     end
 end
